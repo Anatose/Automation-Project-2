@@ -40,7 +40,7 @@ describe('Issue delete', () => {
             .should('have.length', 3);
     });
 
-    it.only('Should be able to abort deleting in confirmation window', () => {
+    it('Should be able to abort deleting in confirmation window', () => {
 
         getIssueDetailsModal()
         //start deleting
