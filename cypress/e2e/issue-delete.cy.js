@@ -15,6 +15,7 @@ describe('Issue delete', () => {
 
     const getIssueDetailsModal = () => cy.get('[data-testid="modal:issue-details"]');
     const backlogList = () => cy.get('[data-testid="board-list:backlog"]');
+    const confirmModal = () => cy.get('[data-testid="modal:confirm"]');
     let deletedIssue
 
 
@@ -26,18 +27,13 @@ describe('Issue delete', () => {
         cy.get('[data-testid="icon:trash"]').click()
 
         //comfirmation
-        cy.get('[data-testid="modal:confirm"]')
-            .contains('button', 'Delete issue')
-            .click()
+        confirmModal().contains('button', 'Delete issue').click()
             .should('not.exist');
 
         //deleted issue not present in the list
         cy.reload();
         backlogList().children().should('not.contain', deletedIssue)
-
-        backlogList()
-            .children()
-            .should('have.length', 3);
+        backlogList().children().should('have.length', 3);
     });
 
     it('Should be able to abort deleting in confirmation window', () => {
@@ -47,19 +43,13 @@ describe('Issue delete', () => {
         cy.get('[data-testid="icon:trash"]').click()
 
         //cancel deletion process
-        cy.get('[data-testid="modal:confirm"]')
-            .contains('button', 'Cancel')
-            .click()
+        confirmModal().contains('button', 'Cancel').click()
             .should('not.exist');
 
         //the issue is still presenting in the list
         cy.reload();
         backlogList().children().should('contain', deletedIssue)
-
-        backlogList()
-            .children()
-            .should('have.length', 4);
-    });
-
+        backlogList().children().should('have.length', 4);
+    })
 });
 
