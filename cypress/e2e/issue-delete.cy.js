@@ -16,20 +16,17 @@ describe('Issue delete', () => {
     const getIssueDetailsModal = () => cy.get('[data-testid="modal:issue-details"]');
     const backlogList = () => cy.get('[data-testid="board-list:backlog"]');
     const confirmModal = () => cy.get('[data-testid="modal:confirm"]');
+    const delButton = () => cy.get('[data-testid="icon:trash"]');
     let deletedIssue
 
 
     it('Should delete the first issue successfully', () => {
-
-
         getIssueDetailsModal()
         //deleting
-        cy.get('[data-testid="icon:trash"]').click()
-
+        delButton().click()
         //comfirmation
         confirmModal().contains('button', 'Delete issue').click()
             .should('not.exist');
-
         //deleted issue not present in the list
         cy.reload();
         backlogList().children().should('not.contain', deletedIssue)
@@ -37,15 +34,12 @@ describe('Issue delete', () => {
     });
 
     it('Should be able to abort deleting in confirmation window', () => {
-
         getIssueDetailsModal()
         //start deleting
-        cy.get('[data-testid="icon:trash"]').click()
-
+        delButton().click()
         //cancel deletion process
         confirmModal().contains('button', 'Cancel').click()
             .should('not.exist');
-
         //the issue is still presenting in the list
         cy.reload();
         backlogList().children().should('contain', deletedIssue)
