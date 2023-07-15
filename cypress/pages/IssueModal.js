@@ -69,16 +69,24 @@ class IssueModal {
         });
     }
 
-    ensureIssueIsVisibleOnBoard(issueTitle){
+    ensureIssueIsVisibleOnBoard(expectedAmountIssues, issueTitle){
         cy.get(this.issueDetailModal).should('not.exist');
         cy.reload();
         cy.contains(issueTitle).should('be.visible');
+        cy.get(this.backlogList).should('be.visible').and('have.length', '1').within(() => {
+            cy.get(this.issuesList)
+                .should('have.length', expectedAmountIssues)
+        });
     }
 
-    ensureIssueIsNotVisibleOnBoard(issueTitle){
+    ensureIssueIsNotVisibleOnBoard(expectedAmountIssues, issueTitle){
         cy.get(this.issueDetailModal).should('not.exist');
         cy.reload();
         cy.contains(issueTitle).should('not.exist');
+        cy.get(this.backlogList).should('be.visible').and('have.length', '1').within(() => {
+            cy.get(this.issuesList)
+                .should('have.length', expectedAmountIssues)
+        });
     }
 
     clickDeleteButton(){
@@ -91,7 +99,7 @@ class IssueModal {
             cy.contains(this.deleteButtonName).click();
         });
         cy.get(this.confirmationPopup).should('not.exist');
-        cy.get(this.backlogList).should('be.visible');
+        
     }
 
     cancelDeletion(){
