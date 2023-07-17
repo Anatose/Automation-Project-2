@@ -40,6 +40,7 @@ describe('Issue delete', () => {
         //cancel deletion process
         confirmModal().contains('button', 'Cancel').click()
             .should('not.exist');
+        cy.get('[data-testid="icon:close"]').first().click();
         //the issue is still presenting in the list
         cy.reload();
         backlogList().children().should('contain', deletedIssue)
