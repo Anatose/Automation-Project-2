@@ -27,7 +27,7 @@ describe('Issue delete', () => {
         //comfirmation
         confirmModal().contains('button', 'Delete issue').click()
             .should('not.exist');
-        //deleted issue not present in the list
+        //deleted issue is not present in the list
         cy.reload();
         backlogList().children().should('not.contain', deletedIssue)
         backlogList().children().should('have.length', 3);
