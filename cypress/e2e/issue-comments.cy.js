@@ -9,7 +9,7 @@ describe('Issue comments creating, editing and deleting', () => {
 
     const getIssueDetailsModal = () => cy.get('[data-testid="modal:issue-details"]');
 
-    it('Should create a comment successfully', () => {
+/*     it('Should create a comment successfully', () => {
         const comment = 'TEST_COMMENT';
 
         getIssueDetailsModal().within(() => {
@@ -99,4 +99,57 @@ describe('Issue comments creating, editing and deleting', () => {
             .find('[data-testid="issue-comment"]')
             .should('not.exist');
     });
+ */
+    it.only('Should add, edit and delete comment successfully', () => {
+
+    
+    const comment = 'TEST_COMMENT';
+    const commentEdited = 'TEST_COMMENT_EDITED';
+
+        getIssueDetailsModal().within(() => {
+
+            //add comment
+            cy.contains('Add a comment...')
+                .click();
+
+            cy.get('textarea[placeholder="Add a comment..."]').type(comment);
+
+            cy.contains('button', 'Save')
+                .click()
+                .should('not.exist');
+
+            cy.contains('Add a comment...').should('exist');
+            cy.get('[data-testid="issue-comment"]').should('contain', comment);
+        
+
+        //edit comment
+        
+            cy.get('[data-testid="issue-comment"]')
+                .first()
+                .contains('Edit')
+                .click()
+                .should('not.exist');
+
+            cy.get('textarea[placeholder="Add a comment..."]')
+                .should('contain', comment)
+                .clear()
+                .type(commentEdited);
+
+            cy.contains('button', 'Save')
+                .click()
+                .should('not.exist');
+
+            cy.get('[data-testid="issue-comment"]')
+                .should('contain', 'Edit')
+                .and('contain', commentEdited);
+                //delete comment
+                cy.contains('Delete').click();          
+        });
+
+        cy.get('[data-testid="modal:confirm"]').contains('button', 'Delete comment')
+        .click().should('not.exist');
+    getIssueDetailsModal().contains(commentEdited).should('not.exist');
+
+
+    });     
 });
