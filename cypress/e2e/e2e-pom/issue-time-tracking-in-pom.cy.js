@@ -51,7 +51,7 @@ describe('Issue delete', () => {
 
 
 
-  it.only('Should log time and remove logging successfully', () => {
+  it('Should log time and remove logging successfully', () => {
 
     //add spent time to the first issue
 
@@ -81,7 +81,7 @@ describe('Issue delete', () => {
     //IssueModal.ensureNoTimeLogged();
     IssueModal.closeDetailModal();
     cy.contains(firstIssue).click();
-   // IssueModal.ensureNoTimeLogged();
+    //IssueModal.ensureNoTimeLogged();
     IssueModal.ensureEstimationIsVisible('20');
 
   });

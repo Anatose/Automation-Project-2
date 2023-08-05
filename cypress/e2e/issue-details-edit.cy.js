@@ -1,7 +1,7 @@
 describe('Issue details editing', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.url().should('eq', `${Cypress.env('baseUrl')}project`).then((url) => {
+    cy.url().should('eq', `${Cypress.env('baseUrl')}project/board`).then((url) => {
       cy.visit(url + '/board');
       cy.contains('This is an issue of type: Task.').click();
     });
@@ -11,8 +11,8 @@ describe('Issue details editing', () => {
     getIssueDetailsModal().within(() => {
       cy.get('[data-testid="select:type"]').click('bottomRight');
       cy.get('[data-testid="select-option:Story"]')
-          .trigger('mouseover')
-          .trigger('click');
+        .trigger('mouseover')
+        .trigger('click');
       cy.get('[data-testid="select:type"]').should('contain', 'Story');
 
       cy.get('[data-testid="select:status"]').click('bottomRight');
@@ -59,7 +59,12 @@ describe('Issue details editing', () => {
       cy.get('textarea[placeholder="Short summary"]').should('have.text', title);
       cy.get('.ql-snow').should('have.text', description);
     });
-  });
+  }); 
 
   const getIssueDetailsModal = () => cy.get('[data-testid="modal:issue-details"]');
 });
+
+
+
+  
+

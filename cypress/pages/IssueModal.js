@@ -116,19 +116,19 @@ class IssueModal {
 
     ensureNoTimeLoggedNotVisible() {
         cy.contains('No time logged').should('not.exist');
-      }
+    }
 
-      ensureTimeRemainingVisible(timeRemaining) {
+    ensureTimeRemainingVisible(timeRemaining) {
         //cy.contains(timeRemaining + "h" + " " + "estimated").next().within(() => {
-          cy.contains(timeRemaining + "h" + " " + "remaining").should('be.visible');
+        cy.contains(timeRemaining + "h" + " " + "remaining").should('be.visible');
         //});
-      }
+    }
 
     ensureSpentTimeVisible(spentTime) {
         //cy.contains(spentTime + "h" + " " + "logged").next().within(() => {
-          cy.contains(spentTime + "h" + " " + "logged").should('be.visible');
-       // });
-      }
+        cy.contains(spentTime + "h" + " " + "logged").should('be.visible');
+        // });
+    }
 
     editDescription(description) {
         cy.get(this.descriptionField).type(description);
