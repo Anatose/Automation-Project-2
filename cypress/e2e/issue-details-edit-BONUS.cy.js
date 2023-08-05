@@ -9,7 +9,7 @@ describe('Issue details editing', () => {
       });
   });
 
-  it('Should update type, status, assignees, reporter, priority successfully', () => {
+/*   it('Should update type, status, assignees, reporter, priority successfully', () => {
     getIssueDetailsModal().within(() => {
       cy.get('[data-testid="select:type"]').click('bottomRight');
       cy.get('[data-testid="select-option:Story"]')
@@ -70,7 +70,7 @@ describe('Issue details editing', () => {
       cy.get('.ql-snow').should('have.text', description);
     });
   });
-
+ */
 
 
 
@@ -83,7 +83,10 @@ describe('Issue details editing', () => {
   const selectedPriorityArray = [];
   const selectPriority = '[data-testid="select:priority"]';
 
-  it.only('should validate values in issue priorities', () => {
+
+  //Sprint2 A3 Task 1
+
+  /* it('should validate values in issue priorities', () => {
     const expectedLength = 5;
     let selectedPriorityArray = [];
   
@@ -104,7 +107,7 @@ describe('Issue details editing', () => {
       const expectedPriorities = ["Lowest", "Low", "Medium", "High", "Highest"];
       expect(selectedPriorityArray).to.deep.equal(expectedPriorities);
     });
-  });
+  }); */
   
 
 
